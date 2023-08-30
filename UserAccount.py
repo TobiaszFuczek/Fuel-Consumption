@@ -9,7 +9,7 @@ class User_Account:
     def add_new_car(self):
         car_brand = input("Enter car brand: ")
         registration_number = input("Enter registration number: ")
-        car = Car(car_brand)
+        car = Car(car_brand, user_account=self)
         car.registration_number =  registration_number
         self.cars.append(car)
 
@@ -26,7 +26,7 @@ class User_Account:
 
 
 if __name__ == '__main__':
-    login = input("Request Login: ")
+    login = input("Request Login, your password is your e-mail: ")
     password = input("Request Password: ")
     user = User_Account(login, password)
     user.validate_password()

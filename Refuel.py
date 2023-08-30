@@ -6,3 +6,5 @@ class Refuel:
         self.kilometers = kilometers
         self.user = user
         self.car = car
+
+
