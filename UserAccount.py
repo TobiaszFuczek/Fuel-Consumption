@@ -1,9 +1,16 @@
+from Car import Car
+
+
 class User_Account:
     def __init__(self, login ="", password =""):
         self.login = login
         self.password = password
         self.cars = []
-    def add_new_car(self, car):
+    def add_new_car(self):
+        car_brand = input("Enter car brand: ")
+        registration_number = input("Enter registration number: ")
+        car = Car(car_brand)
+        car.registration_number =  registration_number
         self.cars.append(car)
 
     def get_cars(self):
@@ -23,3 +30,4 @@ if __name__ == '__main__':
     password = input("Request Password: ")
     user = User_Account(login, password)
     user.validate_password()
+    user.add_new_car()
