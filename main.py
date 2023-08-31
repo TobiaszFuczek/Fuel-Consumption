@@ -1,10 +1,9 @@
 from UserAccount import UserAccount
-from Car import Car
 from Refuel import Refuel
-
+from Car import Car
 
 def main():
-    user = None  # Zmienna przechowująca obiekt UserAccount
+    user = None  # Variable storing the object UserAccount
 
     while True:
         print("Fuel Consumption APP Menu: ")
@@ -12,7 +11,8 @@ def main():
         print("2. Register Refueling")
         print("3. Calculate Current Fuel Consumption")
         print("4. Calculate Average Fuel Consumption")
-        print("5. Exit")
+        print("5. Preview in Register Refueling")
+        print("6. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -28,26 +28,37 @@ def main():
 
         elif choice == "2":
             if user is not None:
-                # Dodaj nowy samochód do konta użytkownika
+                # Add new car to user account
                 user.add_new_car()
 
-                # Tworzymy instancję Car na podstawie wprowadzonych danych
+                # Create a Car instance based on the data entered
                 car = user.get_cars()[-1]  # Zakładamy, że użytkownik dodał ostatnio dodany samochód
 
-                # Wprowadź informacje o tankowaniu
+                # Enter information about refueled
                 refuel = Refuel(None, None, None, user, car)
                 refuel.enter_information_about_refuel()
 
-                # Dodaj informacje o tankowaniu do historii samochodu
+                # Add information about refuel to car history
                 car.add_refuel(refuel)
 
                 print("Refueling registered.")
             else:
                 print("You need to log in first.")
 
-        # Tutaj możesz dodać pozostałe opcje menu (obliczenia, wyjście, itp.)
-
         elif choice == "5":
+            if user is not None:
+                cars = user.get_cars()
+                if cars:
+                    print("Cars in your account:")
+                    for i, car in enumerate(cars, 1):
+                        print(f"{i}. Car Name: {car.name}, Registration Number: {car.registration_number}")
+                else:
+                    print("You haven't registered any cars yet.")
+            else:
+                print("You need to log in first.")
+        # Here can you add other options menu (calculation, output, etc.)
+
+        elif choice == "6":
             print("Exiting the Fuel Consumption App.")
             break
 
