@@ -1,7 +1,7 @@
 from Car import Car
 
 
-class User_Account:
+class UserAccount:
     def __init__(self, login ="", password =""):
         self.login = login
         self.password = password
@@ -25,9 +25,4 @@ class User_Account:
                 self.password = input("Request Password: ")
 
 
-if __name__ == '__main__':
-    login = input("Request Login, your password is your e-mail: ")
-    password = input("Request Password: ")
-    user = User_Account(login, password)
-    user.validate_password()
-    user.add_new_car()
+
