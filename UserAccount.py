@@ -6,9 +6,7 @@ class UserAccount:
         self.login = login
         self.password = password
         self.cars = []
-    def add_new_car(self):
-        car_brand = input("Enter car brand: ")
-        registration_number = input("Enter registration number: ")
+    def obj(self):
         car = Car(car_brand, user_account=self)
         car.registration_number =  registration_number
         self.cars.append(car)

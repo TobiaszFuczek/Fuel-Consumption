@@ -1,67 +1,48 @@
-from UserAccount import UserAccount
+
 from Refuel import Refuel
 from Car import Car
 
-def main():
-    user = None  # Variable storing the object UserAccount
 
-    while True:
-        print("Fuel Consumption APP Menu: ")
-        print("1. Enter your Login and Password")
-        print("2. Register Refueling")
-        print("3. Calculate Current Fuel Consumption")
-        print("4. Calculate Average Fuel Consumption")
-        print("5. Preview in Register Refueling")
-        print("6. Exit")
+class View:
+    def print_msg(self,msg):
+        print(msg)
 
-        choice = input("Enter your choice: ")
+    def get_str(self, msg):
+        self.print_msg(msg)
+        return input()
 
-        if choice == "1":
-            if user is None:
-                login = input("Request Login, your password is your e-mail: ")
-                password = input("Request Password: ")
-                user = UserAccount(login, password)
-                user.validate_password()
-                print("Login successful.")
-            else:
-                print("You are already logged in.")
+class Model:
+    def __init__(self, name):
+        self.name = name
 
-        elif choice == "2":
-            if user is not None:
-                # Add new car to user account
-                user.add_new_car()
+class ModelStorage:
 
-                # Create a Car instance based on the data entered
-                car = user.get_cars()[-1]  # Zakładamy, że użytkownik dodał ostatnio dodany samochód
+    def __init__(self):
+        self.storage = []
 
-                # Enter information about refueled
-                refuel = Refuel(None, None, None, user, car)
-                refuel.enter_information_about_refuel()
+    def append(self, model):
+        self.storage.append(model)
 
-                # Add information about refuel to car history
-                car.add_refuel(refuel)
+class Controller:
+    def __init__(self):
+        self.view = View()
+        self.model_storage = ModelStorage()
 
-                print("Refueling registered.")
-            else:
-                print("You need to log in first.")
+    def control(self):
+        while True:
+            self.view.print_msg("APP Menu: ")
+            self.view.print_msg("1. Enter model")
+            self.view.print_msg("6. Exit")
 
-        elif choice == "5":
-            if user is not None:
-                cars = user.get_cars()
-                if cars:
-                    print("Cars in your account:")
-                    for i, car in enumerate(cars, 1):
-                        print(f"{i}. Car Name: {car.name}, Registration Number: {car.registration_number}")
-                else:
-                    print("You haven't registered any cars yet.")
-            else:
-                print("You need to log in first.")
-        # Here can you add other options menu (calculation, output, etc.)
+            choice = self.view.get_str("Enter your choice: ")
 
-        elif choice == "6":
-            print("Exiting the Fuel Consumption App.")
+            if choice == "1":
+                car = self.model_storage.append(Model(self.view.get_str("Enter name:")))
+            elif choice == "6":
+                view.print_msg("Exiting the Fuel Consumption App.")
             break
 
 
+# main
 if __name__ == '__main__':
-    main()
+    Controller().control()
