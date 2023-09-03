@@ -1,6 +1,6 @@
 class Refuel:
     def __init__(self, date_time, amount_liters, kilometers, user, car):
-        self.datetime = date_time
+        self.date_time = date_time
         self.amount_liters = amount_liters
         self.kilometers = kilometers
         self.user = user
