@@ -39,7 +39,7 @@ class Controller:
             self.view.print_msg("APP Menu: ")
             self.view.print_msg("1. Enter model")
             self.view.print_msg("2. Display information about cars")
-            self.view.print_msg("6. Exit")
+            self.view.print_msg("3. Exit")
 
             choice = self.view.get_str("Enter your choice: ")
 
@@ -74,6 +74,8 @@ class Controller:
                         self.view.print_msg("Invalid input. Please enter a valid car number.")
                 else:
                     self.view.print_msg("Please log in first.")
+            else:
+                break
 
     def control(self):
         self.create_user_account()
