@@ -13,21 +13,10 @@ class UserAccount:
         return self.cars
 
     def display_cars(self):
-        if self.cars:
-            print("Your cars:")
-            for i, car in enumerate(self.cars, 1):
-                print(f"{i}. {car.name}")
-        else:
-            print("You don't have any cars.")
+        pass
 
     def validate_password(self):
-        while True:
-            if len(self.password) >= 8 and any(c.isupper() for c in self.password) and any(sign in self.password for sign in ["!", ",", ".", "$", "%", "&", "*", "?"]):
-                print("Password is correct")
-                break
-            else:
-                print("Password is too short or wrong, please try again")
-                self.password = input("Request Password: ")
+        pass
 
 
 

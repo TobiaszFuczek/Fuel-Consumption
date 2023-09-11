@@ -7,9 +7,9 @@ class Refuel:
         self.car = car
 
     def enter_information_about_refuel(self):
-        self.date_time = input("Enter date and time in formatt (DD-MM-YYYY) and (HH:MM): ")
-        self.amount_liters = float(input("Enter amount liters refueled: "))
-        self.kilometers = float(input("Enter kilometers driven: "))
+        self.date_time = "Enter date and time in formatt (DD-MM-YYYY) and (HH:MM): "
+        self.amount_liters = "Enter amount liters refueled: "
+        self.kilometers = "Enter kilometers driven: "
         self.car.add_refuel(self)
 
 

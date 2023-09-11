@@ -28,6 +28,28 @@ class Controller:
         self.model_storage = ModelStorage()
         self.user_account = None
 
+    def validate_user_password(self):
+        while True:
+            if len(self.user_account.password) >= 8 and any(c.isupper() for c in self.user_account.password) and any(
+                    sign in self.user_account.password for sign in ["!", ",", ".", "$", "%", "&", "*", "?"]):
+                self.view.print_msg("Password is correct")
+                break
+            else:
+                self.view.print_msg("Password is too short or wrong, please try again")
+                self.user_account.password = self.view.get_str("Request Password: ")
+
+    def display_user_cars(self):
+        if self.user_account.cars:
+            self.view.print_msg("Your cars:")
+            for i, car in enumerate(self.user_account.cars, 1):
+                self.view.print_msg(f"{i}. {car.name}")
+        else:
+            self.view.print_msg("You don't have any cars.")
+
+    def get_refuel_info_from_user(self, refuel):
+        refuel.date_time = self.view.get_str("Enter date and time in format (DD-MM-YYYY) and (HH:MM): ")
+        refuel.amount_liters = float(self.view.get_str("Enter amount liters refueled: "))
+        refuel.kilometers = float(self.view.get_str("Enter kilometers driven: "))
     def create_user_account(self):
         login = self.view.get_str("Enter login: ")
         password = self.view.get_str("Enter password: ")
@@ -48,7 +70,8 @@ class Controller:
                     car_name = self.view.get_str("Enter name: ")
                     car = Car(car_name, self.user_account)
                     refuel = Refuel(None, None, None, self.user_account, car)
-                    refuel.enter_information_about_refuel()
+                    self.get_refuel_info_from_user(refuel)
+                    car.add_refuel(refuel)
                     self.user_account.add_new_car(car)
                     self.view.print_msg(f"Car {car_name} added to your account.")
                 else:
@@ -56,7 +79,7 @@ class Controller:
 
             elif choice == "2":
                 if self.user_account:
-                    self.user_account.display_cars()
+                    self.display_user_cars()
                     car_choice = self.view.get_str("0 to go back: ")
                     if car_choice.isdigit():
                         car_choice = int(car_choice)
